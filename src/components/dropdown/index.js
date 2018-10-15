@@ -11,6 +11,7 @@ import {
   Platform,
   ViewPropTypes,
   I18nManager,
+  Image
 } from 'react-native';
 import Ripple from 'react-native-material-ripple';
 import { TextField } from 'react-native-material-textfield';
@@ -499,19 +500,19 @@ export default class Dropdown extends PureComponent {
       return renderBase({ ...props, title, value, renderAccessory });
     }
 
-    title = null == title || 'string' === typeof title?
-      title:
+    title = null == title || 'string' === typeof title ?
+      title :
       String(title);
 
     return (
       <TextField
         label=''
         // labelHeight={dropdownOffset.top - Platform.select({ ios: 12, android: 12 })}
-        labelHeight = {16}
+        labelHeight={16}
         {...props}
-        labelPadding = {0}
-        lineWidth = {0}
-        inputContainerPadding = {0}
+        labelPadding={2}
+        lineWidth={0}
+        inputContainerPadding={2}
         value={title}
         editable={false}
         onChangeText={undefined}
@@ -558,7 +559,8 @@ export default class Dropdown extends PureComponent {
     return (
       <View style={styles.accessory}>
         <View style={styles.triangleContainer}>
-          <View style={[styles.triangle, triangleStyle]} />
+          <Image style={[styles.triangle1]} source={require('./dropdown.png')} />
+          {/* <View style={[styles.triangle, triangleStyle]} /> */}
         </View>
       </View>
     );
@@ -607,16 +609,16 @@ export default class Dropdown extends PureComponent {
     let value = valueExtractor(item, index);
     let label = labelExtractor(item, index);
 
-    let title = null == label?
-      value:
+    let title = null == label ?
+      value :
       label;
 
-    let color = disabled?
-      disabledItemColor:
-      ~selected?
-        index === selected?
-          selectedItemColor:
-          itemColor:
+    let color = disabled ?
+      disabledItemColor :
+      ~selected ?
+        index === selected ?
+          selectedItemColor :
+          itemColor :
         selectedItemColor;
 
     let textStyle = { color, fontSize };
@@ -684,7 +686,7 @@ export default class Dropdown extends PureComponent {
     if (null == dropdownPosition) {
       switch (selected) {
         case -1:
-          translateY -= 1 === itemCount? 0 : itemSize;
+          translateY -= 1 === itemCount ? 0 : itemSize;
           break;
 
         case 0:
@@ -727,7 +729,7 @@ export default class Dropdown extends PureComponent {
     };
 
     return (
-      <View onLayout={this.onLayout} ref={this.updateContainerRef} style={[containerStyle, {paddingHorizontal: 15}]}>
+      <View onLayout={this.onLayout} ref={this.updateContainerRef} style={[containerStyle, { paddingHorizontal: 15 }]}>
         <TouchableWithoutFeedback {...touchableProps}>
           <View pointerEvents='box-only'>
             {this.renderBase(props)}
@@ -747,7 +749,7 @@ export default class Dropdown extends PureComponent {
             onResponderRelease={this.blur}
           >
             <View
-              style={[styles.picker, pickerStyle, pickerStyleOverrides, {marginLeft: 15, width: width - 30}]}
+              style={[styles.picker, pickerStyle, pickerStyleOverrides, { marginLeft: 15, width: width - 30 }]}
               onStartShouldSetResponder={() => true}
             >
               <FlatList
