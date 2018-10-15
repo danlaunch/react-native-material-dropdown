@@ -18,6 +18,11 @@ export default StyleSheet.create({
     }],
   },
 
+  triangle1 : {
+    width: 12,
+    height: 7,
+  },
+  
   triangleContainer: {
     width: 12,
     height: 6,
