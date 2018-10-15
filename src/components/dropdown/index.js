@@ -409,7 +409,7 @@ export default class Dropdown extends PureComponent {
     let {
       top = 16,
       right = 0,
-      bottom = -8,
+      bottom = -4,
       left = 0,
     } = this.props.rippleInsets || {};
 
@@ -506,10 +506,12 @@ export default class Dropdown extends PureComponent {
     return (
       <TextField
         label=''
-        labelHeight={dropdownOffset.top - Platform.select({ ios: 1, android: 2 })}
-
+        // labelHeight={dropdownOffset.top - Platform.select({ ios: 12, android: 12 })}
+        labelHeight = {16}
         {...props}
-
+        labelPadding = {0}
+        lineWidth = {0}
+        inputContainerPadding = {0}
         value={title}
         editable={false}
         onChangeText={undefined}
@@ -725,7 +727,7 @@ export default class Dropdown extends PureComponent {
     };
 
     return (
-      <View onLayout={this.onLayout} ref={this.updateContainerRef} style={containerStyle}>
+      <View onLayout={this.onLayout} ref={this.updateContainerRef} style={[containerStyle, {paddingHorizontal: 15}]}>
         <TouchableWithoutFeedback {...touchableProps}>
           <View pointerEvents='box-only'>
             {this.renderBase(props)}
@@ -745,7 +747,7 @@ export default class Dropdown extends PureComponent {
             onResponderRelease={this.blur}
           >
             <View
-              style={[styles.picker, pickerStyle, pickerStyleOverrides]}
+              style={[styles.picker, pickerStyle, pickerStyleOverrides, {marginLeft: 15, width: width - 30}]}
               onStartShouldSetResponder={() => true}
             >
               <FlatList
